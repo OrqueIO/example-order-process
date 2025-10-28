@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+  xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+  xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"
+  xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"
+  id="discountDecisionDefs"
+  name="Discount Decision"
+  namespace="http://camunda.org/schema/1.0/dmn"
+  exporter="Camunda Modeler"
+  exporterVersion="5.40.0">
+
+  <decision id="discountDecision" name="Process Discount Decision" camunda:historyTimeToLive="P180D">
+    <decisionTable id="decisionTable1" hitPolicy="FIRST">
+      <input id="in1" label="Client Type">
+        <inputExpression id="inExpr1" typeRef="string">
+          <text>clientType</text>
+        </inputExpression>
+      </input>
+      <input id="in2" label="Order Total Amount">
+        <inputExpression id="inExpr2" typeRef="number">
+          <text>orderAmount</text>
+        </inputExpression>
+      </input>
+
+      <output id="out1" label="Discount (%)" name="discount" typeRef="number" />
+
+      <rule id="r1">
+        <inputEntry>
+          <text>"Standard"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&lt; 100</text>
+        </inputEntry>
+        <outputEntry>
+          <text>0</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r2">
+        <inputEntry>
+          <text>"Standard"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>[100..500]</text>
+        </inputEntry>
+        <outputEntry>
+          <text>5</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r3">
+        <inputEntry>
+          <text>"Standard"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <outputEntry>
+          <text>8</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r4">
+        <inputEntry>
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&lt; 100</text>
+        </inputEntry>
+        <outputEntry>
+          <text>10</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r5">
+        <inputEntry>
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>[100..500]</text>
+        </inputEntry>
+        <outputEntry>
+          <text>15</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r6">
+        <inputEntry>
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&gt;= 500</text>
+        </inputEntry>
+        <outputEntry>
+          <text>20</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r7">
+        <inputEntry>
+          <text>"VIP"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&lt; 500</text>
+        </inputEntry>
+        <outputEntry>
+          <text>20</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r8">
+        <inputEntry>
+          <text>"VIP"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>[500..1000]</text>
+        </inputEntry>
+        <outputEntry>
+          <text>25</text>
+        </outputEntry>
+      </rule>
+
+      <rule id="r9">
+        <inputEntry>
+          <text>"VIP"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <outputEntry>
+          <text>30</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1">
+      <dmndi:DMNShape id="DMNShape_discountDecision" dmnElementRef="discountDecision">
+        <dc:Bounds x="270" y="220" width="200" height="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
