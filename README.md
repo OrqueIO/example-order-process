@@ -1,19 +1,27 @@
 # Orqueio BPM - Example Order Process
 
-This project demonstrates the integration between a **BPMN process** and a **DMN decision** using **Orqueio BPM Engine** and **Spring Boot**.  
+> **Webinar Project** - October 29, 2025
+> This demonstration project was presented during the Orqueio BPM webinar showcasing enterprise workflow automation capabilities.
+
+This project demonstrates the integration between a **BPMN process** and a **DMN decision** using **Orqueio BPM Engine** and **Spring Boot**.
 It automates an order workflow that includes a DMN evaluation to determine the customer notification type and sends it automatically.
 
 ## Features
 
-- Complete BPMN process: start event, service tasks, business rule task, user task, and end event.
-- Integrated DMN decision table to select the notification type.
-- MySQL database integration.
-- Simple HTML form interface to create an order.
+- Complete BPMN order processing workflow with multiple service tasks
+- Payment capture, discount application, and order preparation automation
+- Shipping and delivery payment handling
+- Order cancellation support
+- H2 embedded database (no external database setup required)
+- Simple HTML form interface to create orders
+- Spring Boot 4.0.2 integration
+- Orqueio BPM Engine 2.0.2
+- Lombok support for cleaner code
 
 ## Prerequisites
 
-- Java 17 or 21
-- MySQL 8+
+- Java 21
+- H2 Database (embedded, no external setup required)
 
 ## Setup
 
@@ -45,11 +53,22 @@ To embed the Orqueio Engine with Enterprise Webapps and REST API, add the follow
     <artifactId>orqueio-bpm-spring-boot-starter-rest</artifactId>
   </dependency>
 
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.33</version>
-    </dependency>
+  <dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+  </dependency>
+
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>
+
+  <dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+  </dependency>
 </dependencies>
 ```
 
@@ -118,24 +137,8 @@ Use the delegate in your BPMN model via the Implementation field: `orqueio:deleg
 
 ### 5. Configuration
 
-Adjust the src/main/resources/application.yaml file according to your preferences, and configure the database connection as shown below:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/process_engine?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: orqueio
-    password: orqueio
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
-    show-sql: true
-```
+The project uses H2 embedded database by default - no external database setup required.
+The database is configured automatically by Spring Boot and Orqueio Engine.
 
 ### 6. Run the application and use Orqueio Platform
 
