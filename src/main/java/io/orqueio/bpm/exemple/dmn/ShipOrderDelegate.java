@@ -2,13 +2,27 @@ package io.orqueio.bpm.exemple.dmn;
 
 import io.orqueio.bpm.engine.delegate.DelegateExecution;
 import io.orqueio.bpm.engine.delegate.JavaDelegate;
+import io.orqueio.bpm.exemple.dmn.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("shipOrderDelegate")
 public class ShipOrderDelegate implements JavaDelegate {
+
+    private static final Logger log = LoggerFactory.getLogger(ShipOrderDelegate.class);
+
+    @Autowired
+    private OrderService orderService;
+
     @Override
     public void execute(DelegateExecution execution) {
-        // Add your custom order shipping logic here
+        Long orderId = (Long) execution.getVariable("orderId");
+        log.info("Shipping order #{}...", orderId);
+
+        orderService.updateOrderStatus(orderId, "SHIPPED");
+        execution.setVariable("orderStatus", "SHIPPED");
     }
 
 }

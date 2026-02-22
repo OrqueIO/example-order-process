@@ -56,6 +56,6 @@ public class CommandeClientApplication {
         processVars.put("paymentValid", order.getPaymentValid());
         processVars.put("status", order.getStatus());
 
-        runtimeService.startProcessInstanceByKey("Process_CommandeClient", processVars);
+        runtimeService.startProcessInstanceByKey("order-process", processVars);
     }
 }

@@ -7,7 +7,7 @@
   xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="_OrderProcessDefs"
   targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler"
   exporterVersion="3.5.0">
-  <bpmn2:process id="Process_CommandeClient" name="Processus de commande client" isExecutable="true"
+  <bpmn2:process id="order-process" name="Order Processing" isExecutable="true"
     camunda:historyTimeToLive="180">
     <bpmn2:startEvent id="StartEvent_1" name="start"
       camunda:formKey="embedded:app:forms/create_order.html">
@@ -49,7 +49,7 @@
       <bpmn2:outgoing>Flow_0dka0zk</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:serviceTask id="ServiceTask_2" name="mark as to pay at delivery"
-      camunda:delegateExpression="${markAsToPayAtDeliveryDelegate}">
+      camunda:delegateExpression="${payAtDeliveryDelegate}">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -100,7 +100,7 @@
     <bpmn2:sequenceFlow id="Flow_1sre52g" sourceRef="Activity_07aolno" targetRef="Event_0dvn7nx" />
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_CommandeClient">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="order-process">
       <bpmndi:BPMNShape id="ExclusiveGateway_1_di" bpmnElement="ExclusiveGateway_1"
         isMarkerVisible="true">
         <dc:Bounds x="645" y="195" width="50" height="50" />

@@ -20,32 +20,16 @@ public class SaveOrderDelegate implements JavaDelegate {
         String clientType = (String) execution.getVariable("clientType");
         Double orderAmount = (Double) execution.getVariable("orderAmount");
         Boolean paymentOnline = (Boolean) execution.getVariable("paymentOnline");
-        Boolean paymentValid = (Boolean) execution.getVariable("paymentValid");
-        
-        Object discountObj = execution.getVariable("discount");
-        Double discount = 0.0;
-        
-        if (discountObj != null) {
-            if (discountObj instanceof Long) {
-                discount = ((Long) discountObj).doubleValue();
-            } else if (discountObj instanceof Double) {
-                discount = (Double) discountObj;
-            } else if (discountObj instanceof Integer) {
-                discount = ((Integer) discountObj).doubleValue();
-            }
-        }
 
         if (orderAmount == null) {
             throw new IllegalArgumentException("The variable 'orderAmount' is missing!");
         }
 
-
         Order order = new Order();
         order.setClientType(clientType);
         order.setOrderAmount(orderAmount);
-        order.setPaymentOnline(paymentOnline);
-        order.setPaymentValid(paymentValid);
-        order.setDiscountApplied(discount);
+        order.setPaymentOnline(paymentOnline != null ? paymentOnline : false);
+        order.setDiscountApplied(0.0);
         order.setStatus("CREATED");
 
         order.calculateFinalAmount();
@@ -54,6 +38,7 @@ public class SaveOrderDelegate implements JavaDelegate {
 
         Order savedOrder = orderService.save(order);
         execution.setVariable("orderId", savedOrder.getId());
+        execution.setVariable("orderStatus", savedOrder.getStatus());
 
     }
 }

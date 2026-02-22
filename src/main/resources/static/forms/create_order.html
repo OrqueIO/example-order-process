@@ -42,23 +42,23 @@
             cam-variable-name="paymentOnline"
             cam-variable-type="Boolean"
           />
-          Pay online
+          Pay online (if unchecked, payment will be at delivery)
         </label>
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-2">Payment Validated</label>
+    <label class="control-label col-md-2">Simulate Payment Failure</label>
     <div class="col-md-10">
       <div class="checkbox">
         <label>
           <input
             type="checkbox"
-            cam-variable-name="paymentValid"
+            cam-variable-name="simulatePaymentFailure"
             cam-variable-type="Boolean"
           />
-          Payment has been validated
+          Force payment to fail (demo only - simulates bank rejection, timeout, etc.)
         </label>
       </div>
     </div>

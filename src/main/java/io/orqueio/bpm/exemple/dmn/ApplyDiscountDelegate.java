@@ -35,8 +35,11 @@ public class ApplyDiscountDelegate implements JavaDelegate {
         }
 
         orderService.applyDiscount(orderId, discount);
-        execution.setVariable("finalAmount", 
+        orderService.updateOrderStatus(orderId, "DISCOUNT_APPLIED");
+
+        execution.setVariable("finalAmount",
             orderService.findById(orderId).get().getFinalAmount()
         );
+        execution.setVariable("orderStatus", "DISCOUNT_APPLIED");
     }
 }
