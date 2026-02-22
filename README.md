@@ -1,6 +1,9 @@
 # Orqueio BPM - Example Order Process
 
-This project demonstrates the integration between a **BPMN process** and a **DMN decision** using **Orqueio BPM Engine** and **Spring Boot**.  
+> **Webinar Project** - October 29, 2025
+> This demonstration project was presented during the Orqueio BPM webinar showcasing enterprise workflow automation capabilities.
+
+This project demonstrates the integration between a **BPMN process** and a **DMN decision** using **Orqueio BPM Engine** and **Spring Boot**.
 It automates an order workflow that includes a DMN evaluation to determine the customer notification type and sends it automatically.
 
 ## Features
