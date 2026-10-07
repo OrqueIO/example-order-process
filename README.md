@@ -14,7 +14,7 @@ It automates an order workflow that includes a DMN evaluation to determine the c
 - Order cancellation support
 - H2 embedded database (no external database setup required)
 - Simple HTML form interface to create orders
-- Spring Boot 3.5.9 integration
+- Spring Boot 3.5.11 integration
 - Orqueio BPM Engine 1.0.7
 - Lombok support for cleaner code
 
